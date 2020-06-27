@@ -1,0 +1,18 @@
+.levels__wrapper {
+  display: flex;
+  margin-right: 35%;
+  margin-left: 35%;
+  margin-top: 40vh;
+  justify-content: space-between;
+  /* align-items: center; */
+  /* height: 100px; */
+}
+
+.level-dot__wrapper {
+  height: 48px;
+  width: 48px;
+  background-color: rgb(85, 85, 85);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
