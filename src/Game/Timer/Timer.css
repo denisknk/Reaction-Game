@@ -1,0 +1,12 @@
+.timer-wrapper {
+  text-align: center;
+  display: block;
+  font-size: 6em;
+  font-weight: 100;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  margin-top: -1em;
+  transition: 0.3s ease-in-out;
+  color: #555555;
+}

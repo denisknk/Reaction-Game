@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Levels.css";
 import Dot from "./Dot/Dot";
+// import { Link } from "react-router-dom";
 
 class Levels extends Component {
   state = {

@@ -1,0 +1,33 @@
+#gameover {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 2em;
+  color: #555555;
+}
+.gameoverheader {
+  display: block;
+  font-size: 2.5em;
+  font-weight: 100;
+  margin-bottom: 1em;
+  margin-bottom: 40px;
+}
+
+.title_header {
+  font-size: 1.7em;
+  font-weight: 400;
+  margin-top: 24px;
+}
+
+.title_body {
+  font-size: 1.7em;
+  font-weight: 100;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.restart {
+  color: #169616;
+  text-decoration: underline;
+  font-size: 1.7em;
+  cursor: pointer;
+}
