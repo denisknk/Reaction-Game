@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4126505cd246c74f80810c526933b9d3",
+    "revision": "96d515f9b50d9e1edd53d99238f26431",
     "url": "/Reaction-Game/index.html"
   },
   {
-    "revision": "2549b63ad8364de81dc7",
-    "url": "/Reaction-Game/static/css/main.a7febd69.chunk.css"
+    "revision": "55a2f982099c49228d29",
+    "url": "/Reaction-Game/static/css/main.94d4f1d8.chunk.css"
   },
   {
     "revision": "fb9be95d33e89d6fdfc1",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Reaction-Game/static/js/2.3b1cfe65.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2549b63ad8364de81dc7",
+    "revision": "55a2f982099c49228d29",
     "url": "/Reaction-Game/static/js/main.5f2674ba.chunk.js"
   },
   {
