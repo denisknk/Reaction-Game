@@ -24,7 +24,7 @@ class Menu extends Component {
         timeOut = 1400;
         break;
       case 2:
-        timeOut = 1000;
+        timeOut = 540;
         break;
       default:
         return;
@@ -34,7 +34,7 @@ class Menu extends Component {
       this.props.changeLevel(index, "action");
       startTimeCount();
       handleTimeout(this.props.changeLevel, timeOut);
-    }, 3070);
+    }, 3000);
   };
   render() {
     return (

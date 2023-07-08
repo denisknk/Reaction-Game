@@ -79,7 +79,6 @@ function getAverageReactionTimeArray() {
 }
 
 function handleTimeout(changeLevel, timeOut) {
-  // console.log(timeOut);
   setTimeout(() => {
     if (
       averageReactionTime.length === 0 ||
@@ -90,9 +89,7 @@ function handleTimeout(changeLevel, timeOut) {
       return;
     }
     countCheck = averageReactionTime.length;
-    // changedTimeOut += 5;
-    // console.log(timeOut - changedTimeOut);
-  }, timeOut); //- changedTimeOut
+  }, timeOut);
 }
 
 export {
