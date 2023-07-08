@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Reaction-Game/static/css/main.b8ad6828.chunk.css",
+    "main.js": "/Reaction-Game/static/js/main.147b0dfa.chunk.js",
+    "main.js.map": "/Reaction-Game/static/js/main.147b0dfa.chunk.js.map",
+    "runtime-main.js": "/Reaction-Game/static/js/runtime-main.96578002.js",
+    "runtime-main.js.map": "/Reaction-Game/static/js/runtime-main.96578002.js.map",
+    "static/js/2.97859027.chunk.js": "/Reaction-Game/static/js/2.97859027.chunk.js",
+    "static/js/2.97859027.chunk.js.map": "/Reaction-Game/static/js/2.97859027.chunk.js.map",
+    "index.html": "/Reaction-Game/index.html",
+    "precache-manifest.412d4db95b9770abd99ab3a0fb6fcebc.js": "/Reaction-Game/precache-manifest.412d4db95b9770abd99ab3a0fb6fcebc.js",
+    "service-worker.js": "/Reaction-Game/service-worker.js",
+    "static/css/main.b8ad6828.chunk.css.map": "/Reaction-Game/static/css/main.b8ad6828.chunk.css.map",
+    "static/js/2.97859027.chunk.js.LICENSE.txt": "/Reaction-Game/static/js/2.97859027.chunk.js.LICENSE.txt",
+    "static/media/Roboto-Light.ttf": "/Reaction-Game/static/media/Roboto-Light.88823c20.ttf",
+    "static/media/Roboto-Medium.ttf": "/Reaction-Game/static/media/Roboto-Medium.58aef543.ttf",
+    "static/media/Roboto-Thin.ttf": "/Reaction-Game/static/media/Roboto-Thin.321de678.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.96578002.js",
+    "static/js/2.97859027.chunk.js",
+    "static/css/main.b8ad6828.chunk.css",
+    "static/js/main.147b0dfa.chunk.js"
+  ]
+}
