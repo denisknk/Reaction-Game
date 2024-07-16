@@ -10,7 +10,7 @@ const averageReactionTime = [];
 // import { minReactionTime } from "../Game/timings";
 
 function emmit() {
-  eventListeners.forEach((fn) => {
+  eventListeners.forEach(fn => {
     fn();
   });
 }
@@ -84,8 +84,8 @@ function handleTimeout(changeLevel, timeOut) {
       averageReactionTime.length === 0 ||
       averageReactionTime.length === countCheck
     ) {
-      console.log("не успел", getTimeDiff());
-      changeLevel(1, "end");
+      console.log('не успел', getTimeDiff());
+      changeLevel(1, 'end');
       return;
     }
     countCheck = averageReactionTime.length;
@@ -104,5 +104,5 @@ export {
   getTimeDiff,
   makeTimeDiff,
   getAverageReactionTimeArray,
-  handleTimeout,
+  handleTimeout
 };

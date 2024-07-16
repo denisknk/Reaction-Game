@@ -1,11 +1,24 @@
-import React from "react";
-import "./End.css";
-import { clearScore } from "../../services/all";
+import React from 'react';
+import './End.css';
+import { clearScore } from '../../services/all';
+import { GameConditions } from '../consts';
 
-const End = ({ averageReaction, score, highestScore, changeLevel }) => {
+interface Props {
+  averageReaction?: number;
+  score?: number;
+  highestScore?: number;
+  changeLevel: (number: number, condition: GameConditions) => void;
+}
+
+const End: React.FC<Props> = ({
+  averageReaction,
+  score,
+  highestScore,
+  changeLevel
+}) => {
   const handleClick = () => {
     clearScore();
-    changeLevel(1, "menu");
+    changeLevel(1, GameConditions.Menu);
   };
   return (
     <div className="body_wrapper">

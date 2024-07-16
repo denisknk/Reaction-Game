@@ -1,11 +1,5 @@
 .levels__wrapper {
-  display: flex;
-  margin-right: 35%;
-  margin-left: 35%;
   margin-top: 40vh;
-  justify-content: space-between;
-  /* align-items: center; */
-  /* height: 100px; */
 }
 
 .level-dot__wrapper {

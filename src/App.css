@@ -39,6 +39,10 @@ body {
   width: 48px;
   color: #55555588;
   cursor: pointer;
+
+  @media only screen and (max-width: 425px)  {
+    position: initial;
+  }
 }
 
 #howToPlay {

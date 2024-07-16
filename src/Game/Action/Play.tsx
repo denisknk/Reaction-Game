@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import "./Action.css";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import './Action.css';
 import {
   updateScore,
   endTimeCount,
   getAverageReactionTime,
-  handleTimeout,
-} from "../../services/all";
+  handleTimeout
+} from '../../services/all';
+import { GameConditions } from '../consts';
 
-const Play = ({ column, changeLevel, timeOut }) => {
+interface Props {
+  column: any;
+  changeLevel: (number: number, condition: GameConditions) => void;
+  timeOut: any;
+}
+
+const Play: React.FC<Props> = ({ column, changeLevel, timeOut }) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * column) + 1;
   };
@@ -24,42 +30,33 @@ const Play = ({ column, changeLevel, timeOut }) => {
   const [check, setCheck] = useState(false);
   const [lastRandomNumber, setLastRandomNumber] = useState([
     randomNumber(),
-    randomNumber(),
+    randomNumber()
   ]);
-  let arr1 = [];
-  let arr2 = []; // двумерный массив
+  let arr1: number[] = [];
+  let arr2: number[] = [];
   arr1.length = column;
   arr1.fill(1);
   arr2.length = column;
   arr2.fill(1);
-  const style = { backgroundColor: "rgb(74, 222, 155)" };
-  // const  = () => {
+  const style = { backgroundColor: 'rgb(74, 222, 155)' };
 
-  // }
-  const onClick = (val) => {
-    // if (reactionTime > minReactionTime) {
-    //   changeLevel(column - 2, "end");
-    //   return;
-    // }
+  const onClick = (val: any) => {
     endTimeCount();
-    // console.log("we're here", val);
+
     if (val) {
       handleTimeout(changeLevel, timeOut);
-      // console.log("were here");
+
       updateScore(); // добавляем балл за правильно нажатый квадратик
       setCheck(true); // сравнить рандомы тут, иметь переменную в которой хранить прошлое значение квадратика
     } else {
-      console.log(false);
       getAverageReactionTime();
-      changeLevel(column - 2, "end");
+      changeLevel(column - 2, GameConditions.End);
     }
   };
   if (check) {
     createRandom();
     setCheck(false);
   }
-  // логика должна остатьтся максимально до рендера
-  // чекать время в сервисе и счет тоже, история,
 
   return (
     <table>
@@ -90,7 +87,4 @@ const Play = ({ column, changeLevel, timeOut }) => {
   );
 };
 
-Play.propTypes = {
-  changeLevel: PropTypes.func,
-};
 export default Play;
