@@ -13,8 +13,8 @@ import { addEventListener } from '../services/all';
 import { GameConditions, gameConditions } from './consts';
 
 const Game: React.FC = () => {
-  // const [width, setWidth] = useState(0);
-  // const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
   const [level, setLevel] = useState<number | null>(null);
   const [currentCondition, setCurrentCondition] = useState<GameConditions>(
     GameConditions.Menu
@@ -23,10 +23,10 @@ const Game: React.FC = () => {
   const [highestScore, setHighestScore] = useState<number | undefined>();
   const [averageReaction, setAverageReaction] = useState<number | undefined>();
 
-  // const updateWindowDimensions = () => {
-  //   setWidth(window.innerWidth);
-  //   setHeight(window.innerHeight);
-  // };
+  const updateWindowDimensions = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  };
   const changeLevel = (number: number, condition: GameConditions) => {
     setLevel(number);
     setCurrentCondition(condition);
@@ -37,13 +37,12 @@ const Game: React.FC = () => {
       setScore(getScore());
       setHighestScore(getHighestScore());
       setAverageReaction(getAverageReactionTime());
-      // return () => {
-      //   window.removeEventListener('resize', updateWindowDimensions);
-      // };
+      return () => {
+        window.removeEventListener('resize', updateWindowDimensions);
+      };
     });
-
-    // updateWindowDimensions();
-    // window.addEventListener('resize', updateWindowDimensions);
+    updateWindowDimensions();
+    window.addEventListener('resize', updateWindowDimensions);
   }, []);
 
   switch (currentCondition) {

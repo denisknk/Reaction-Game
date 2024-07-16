@@ -38,7 +38,7 @@ const Levels: React.FC<Props> = ({ onSelect }) => {
         <Dot
           color={color}
           blur={setDefaultColor}
-          hover={onHover(index)}
+          hover={() => onHover(index)}
           press={() => onSelect(index)}
           key={index}
         />

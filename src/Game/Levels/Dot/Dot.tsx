@@ -16,7 +16,7 @@ const Dot: React.FC<Props> = ({ color, blur, hover, press }) => {
       onClick={press}
       onMouseLeave={blur}
       className="level-dot__wrapper"
-    ></div>
+    />
   );
 };
 
