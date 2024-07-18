@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Action.css';
 import {
   updateScore,
@@ -7,77 +7,77 @@ import {
   handleTimeout
 } from '../../services/all';
 import { GameConditions } from '../consts';
+import { getRandomNumbersArray, getRenderMatrix } from '../utils';
+import { StyledCell } from './styles';
 
 interface Props {
-  column: any;
+  columnsCount: number;
   changeLevel: (number: number, condition: GameConditions) => void;
   timeOut: any;
 }
 
-const Play: React.FC<Props> = ({ column, changeLevel, timeOut }) => {
-  const randomNumber = () => {
-    return Math.floor(Math.random() * column) + 1;
-  };
-  const createRandom = () => {
-    let rand1 = randomNumber();
-    let rand2 = randomNumber();
-    if (rand1 !== lastRandomNumber[0] && rand2 !== lastRandomNumber[1]) {
-      setLastRandomNumber([rand1, rand2]);
-      return [rand1, rand2];
-    }
-    createRandom();
-  };
+const Play: React.FC<Props> = ({ columnsCount, changeLevel, timeOut }) => {
+  const [timeLeft, setTimeLeft] = useState(3);
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [randomNumbersArr, setRandomNumbersArr] = useState(
+    getRandomNumbersArray(columnsCount)
+  );
+  const [matrix, setMatrix] = useState(getRenderMatrix(columnsCount));
+  const [xAxis, yAxis] = matrix;
+
+  // useEffect(() => {
+  //   const interval = setTimeout(() => {
+  //     if (!isGameStarted) {
+  //       changeLevel(columnsCount - 2, GameConditions.End);
+  //     }
+  //     clearInterval(interval);
+  //   }, timeOut);
+  //
+  //   return () => clearInterval(interval);
+  // }, []);
+
   const [check, setCheck] = useState(false);
-  const [lastRandomNumber, setLastRandomNumber] = useState([
-    randomNumber(),
-    randomNumber()
-  ]);
-  let arr1: number[] = [];
-  let arr2: number[] = [];
-  arr1.length = column;
-  arr1.fill(1);
-  arr2.length = column;
-  arr2.fill(1);
-  const style = { backgroundColor: 'rgb(74, 222, 155)' };
 
-  const onClick = (val: any) => {
-    endTimeCount();
+  const onClick = (isActiveElement: boolean) => {
+    setIsGameStarted(true);
+    // endTimeCount();
 
-    if (val) {
+    if (isActiveElement) {
       handleTimeout(changeLevel, timeOut);
 
       updateScore(); // добавляем балл за правильно нажатый квадратик
       setCheck(true); // сравнить рандомы тут, иметь переменную в которой хранить прошлое значение квадратика
     } else {
       getAverageReactionTime();
-      changeLevel(column - 2, GameConditions.End);
+      changeLevel(columnsCount - 2, GameConditions.End);
     }
   };
+
   if (check) {
-    createRandom();
+    setRandomNumbersArr(getRandomNumbersArray(columnsCount));
     setCheck(false);
   }
 
   return (
     <table>
       <tbody>
-        {arr1.map((el, ind) => {
+        {xAxis.map((el, i) => {
           return (
-            <tr key={ind}>
-              {arr2.map((el, indd) => {
+            <tr key={i}>
+              {yAxis.map((el, idx) => {
                 if (
-                  ind + 1 === lastRandomNumber[0] &&
-                  indd + 1 === lastRandomNumber[1]
+                  i + 1 === randomNumbersArr[0] &&
+                  idx + 1 === randomNumbersArr[1]
                 ) {
                   return (
-                    <td
-                      key={indd}
-                      style={style}
+                    <StyledCell
+                      isActive
+                      key={idx}
                       onClick={() => onClick(true)}
-                    ></td>
+                    />
                   );
                 }
-                return <td key={indd} onClick={() => onClick(false)}></td>;
+                return <StyledCell key={idx} onClick={() => onClick(false)} />;
               })}
             </tr>
           );

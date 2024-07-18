@@ -13,6 +13,7 @@ import { addEventListener } from '../services/all';
 import { GameConditions, gameConditions } from './consts';
 
 const Game: React.FC = () => {
+  // const [seconds, setSeconds] = useState(0);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [level, setLevel] = useState<number | null>(null);

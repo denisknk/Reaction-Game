@@ -6,18 +6,15 @@ const Timer = () => {
   const [timeLeft, setTimeLeft] = useState(3);
 
   useEffect(() => {
-    // clearInterval(timer);
-    // let timer = setInterval(() => {
-    //   let timeLeftLocal = timeLeft - 1;
-    //   if (timeLeft === 1) {
-    //     clearInterval(timer);
-    //   }
-    //   setTimeLeft(timeLeftLocal);
-    // }, 1000);
-    // return () => {
-    //   // clearInterval(timer);
-    // };
-  }, [timeLeft]);
+    const interval = setInterval(() => {
+      if (timeLeft === 1) {
+        clearInterval(interval);
+      }
+      setTimeLeft(prevSeconds => prevSeconds - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="body_wrapper">

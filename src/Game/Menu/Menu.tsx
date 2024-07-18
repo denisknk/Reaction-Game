@@ -35,7 +35,7 @@ const Menu: React.FC<Props> = ({ changeLevel }) => {
     setTimeout(() => {
       changeLevel(index, GameConditions.Action);
       startTimeCount();
-      handleTimeout(changeLevel, timeOut);
+      // handleTimeout(changeLevel, timeOut);
     }, 3000);
   };
 

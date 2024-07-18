@@ -19,7 +19,8 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "styled-components": "^5.3.11"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,6 +40,7 @@
   "devDependencies": {
     "eslint-config-prettier": "6.7.0",
     "eslint-plugin-prettier": "3.1.1",
+    "@types/styled-components": "5.1.0",
     "prettier": "2.0.5",
     "typescript": "4.6.3",
     "@types/react": "16.9.0",
