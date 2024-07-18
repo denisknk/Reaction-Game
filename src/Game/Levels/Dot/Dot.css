@@ -1,16 +1,17 @@
 .levels__wrapper {
   display: flex;
-  margin-right: 35%;
-  margin-left: 35%;
-  margin-top: 40vh;
+  align-self: center;
   justify-content: space-between;
-  /* align-items: center; */
-  /* height: 100px; */
+  width: 300px;
+
+  @media only screen and (max-width: 425px)  {
+    width: 50%;
+  }
 }
 
 .level-dot__wrapper {
   height: 48px;
-  width: 48px;
+  min-width: 48px;
   background-color: rgb(85, 85, 85);
   border-radius: 50%;
   cursor: pointer;
