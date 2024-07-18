@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Action.css';
-import {
-  updateScore,
-  endTimeCount,
-  getAverageReactionTime,
-  handleTimeout
-} from '../../services/all';
+import { updateScore, endTimeCount, getAverageReactionTime, handleTimeout } from '../../services/all';
 import { GameConditions } from '../consts';
 import { getRandomNumbersArray, getRenderMatrix } from '../utils';
 import { StyledCell } from './styles';
+import { gameFlowActions } from '../../store/gameFlow';
+import { getScore } from '../../store/gameFlow/selectors';
 
 interface Props {
   columnsCount: number;
@@ -17,13 +15,15 @@ interface Props {
 }
 
 const Play: React.FC<Props> = ({ columnsCount, changeLevel, timeOut }) => {
+  const dispatch = useDispatch();
+  const currentScore = useSelector(getScore);
   const [timeLeft, setTimeLeft] = useState(3);
   const [isGameStarted, setIsGameStarted] = useState(false);
-  const [randomNumbersArr, setRandomNumbersArr] = useState(
-    getRandomNumbersArray(columnsCount)
-  );
+  const [randomNumbersArr, setRandomNumbersArr] = useState(getRandomNumbersArray(columnsCount));
   const [matrix, setMatrix] = useState(getRenderMatrix(columnsCount));
   const [xAxis, yAxis] = matrix;
+
+  console.log('currentScore', currentScore);
 
   // useEffect(() => {
   //   const interval = setTimeout(() => {
@@ -36,27 +36,23 @@ const Play: React.FC<Props> = ({ columnsCount, changeLevel, timeOut }) => {
   //   return () => clearInterval(interval);
   // }, []);
 
-  const [check, setCheck] = useState(false);
-
   const onClick = (isActiveElement: boolean) => {
     setIsGameStarted(true);
     // endTimeCount();
 
     if (isActiveElement) {
-      handleTimeout(changeLevel, timeOut);
+      // handleTimeout(changeLevel, timeOut);
 
-      updateScore(); // добавляем балл за правильно нажатый квадратик
-      setCheck(true); // сравнить рандомы тут, иметь переменную в которой хранить прошлое значение квадратика
+      dispatch(gameFlowActions.addScore());
+      setRandomNumbersArr(getRandomNumbersArray(columnsCount));
     } else {
       getAverageReactionTime();
+
       changeLevel(columnsCount - 2, GameConditions.End);
     }
   };
 
-  if (check) {
-    setRandomNumbersArr(getRandomNumbersArray(columnsCount));
-    setCheck(false);
-  }
+  // setRandomNumbersArr(getRandomNumbersArray(columnsCount));
 
   return (
     <table>
@@ -65,17 +61,8 @@ const Play: React.FC<Props> = ({ columnsCount, changeLevel, timeOut }) => {
           return (
             <tr key={i}>
               {yAxis.map((el, idx) => {
-                if (
-                  i + 1 === randomNumbersArr[0] &&
-                  idx + 1 === randomNumbersArr[1]
-                ) {
-                  return (
-                    <StyledCell
-                      isActive
-                      key={idx}
-                      onClick={() => onClick(true)}
-                    />
-                  );
+                if (i + 1 === randomNumbersArr[0] && idx + 1 === randomNumbersArr[1]) {
+                  return <StyledCell isActive key={idx} onClick={() => onClick(true)} />;
                 }
                 return <StyledCell key={idx} onClick={() => onClick(false)} />;
               })}

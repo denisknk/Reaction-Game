@@ -4,11 +4,7 @@ import Menu from './Menu/Menu';
 import Action from './Action/Action';
 import Timer from './Timer/Timer';
 import End from './End/End';
-import {
-  getScore,
-  getHighestScore,
-  getAverageReactionTime
-} from '../services/all';
+import { getScore, getHighestScore, getAverageReactionTime } from '../services/all';
 import { addEventListener } from '../services/all';
 import { GameConditions, gameConditions } from './consts';
 
@@ -17,9 +13,7 @@ const Game: React.FC = () => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [level, setLevel] = useState<number | null>(null);
-  const [currentCondition, setCurrentCondition] = useState<GameConditions>(
-    GameConditions.Menu
-  );
+  const [currentCondition, setCurrentCondition] = useState<GameConditions>(GameConditions.Menu);
   const [score, setScore] = useState<number | undefined>();
   const [highestScore, setHighestScore] = useState<number | undefined>();
   const [averageReaction, setAverageReaction] = useState<number | undefined>();
@@ -54,14 +48,7 @@ const Game: React.FC = () => {
     case gameConditions.action:
       return <Action level={level} changeLevel={changeLevel} />;
     case gameConditions.end:
-      return (
-        <End
-          score={score}
-          highestScore={highestScore}
-          changeLevel={changeLevel}
-          averageReaction={averageReaction}
-        />
-      );
+      return <End highestScore={highestScore} changeLevel={changeLevel} averageReaction={averageReaction} />;
     default:
       return <Menu changeLevel={changeLevel} />;
   }
