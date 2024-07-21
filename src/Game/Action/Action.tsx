@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import './Action';
 import Play from './Play';
-import { GameConditions } from '../consts';
+import { getSelectedLevel } from '../../store/gameFlow/selectors';
 
-interface Props {
-  level: any;
-  changeLevel: (number: number, condition: GameConditions) => void;
-}
+const Action: React.FC = () => {
+  const selectedLevel = useSelector(getSelectedLevel);
 
-const Action: React.FC<Props> = ({ level, changeLevel }) => {
-  switch (level) {
+  switch (selectedLevel) {
     case 0:
-      return <Play columnsCount={3} changeLevel={changeLevel} timeOut={1700} />;
+      return <Play columnsCount={3} timeOut={1700} />;
     case 1:
-      return <Play columnsCount={4} changeLevel={changeLevel} timeOut={1400} />;
+      return <Play columnsCount={4} timeOut={1400} />;
     case 2:
-      return <Play columnsCount={5} changeLevel={changeLevel} timeOut={1000} />;
+      return <Play columnsCount={5} timeOut={1000} />;
     default:
       return null;
   }

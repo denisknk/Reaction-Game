@@ -1,32 +1,32 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './End.css';
-import { clearScore } from '../../services/all';
-import { GameConditions } from '../consts';
-import { getScore } from '../../store/gameFlow/selectors';
+import { emptyValuePlaceholder, GameConditions } from '../consts';
+import { getAllScoresArray, getReactionTimes, getScore } from '../../store/gameFlow/selectors';
 import { gameFlowActions } from '../../store/gameFlow';
+import { getAverageReactionTime } from '../utils';
 
-interface Props {
-  averageReaction?: number;
-  highestScore?: number;
-  changeLevel: (number: number, condition: GameConditions) => void;
-}
-
-const End: React.FC<Props> = ({ averageReaction, highestScore, changeLevel }) => {
+const End: React.FC = () => {
   const dispatch = useDispatch();
   const currentScore = useSelector(getScore);
+  const reactionTimes = useSelector(getReactionTimes);
+  const averageReactionTime = getAverageReactionTime(reactionTimes);
+  const allScoresArray = useSelector(getAllScoresArray);
   const handleClick = () => {
-    dispatch(gameFlowActions.resetScore());
-    changeLevel(1, GameConditions.Menu);
+    dispatch(gameFlowActions.resetState());
+    dispatch(gameFlowActions.gameCondition({ condition: GameConditions.Menu }));
   };
+  const highestScore = Math.max(...allScoresArray);
+  const averageTimeText = averageReactionTime ? `${averageReactionTime} milliseconds` : emptyValuePlaceholder;
+
   return (
     <div className="body_wrapper">
       <div id="gameover">
         <span className="gameoverheader">GAME OVER!</span>
         <div className="title_header">Average Reaction Time</div>
-        <span className="title_body">{averageReaction} milliseconds</span>
+        <span className="title_body">{averageTimeText}</span>
         <div className="title_header">Score</div>
-        <span className="title_body">{currentScore}</span>
+        <span className="title_body">{currentScore || emptyValuePlaceholder}</span>
         <div className="title_header">Highest Score</div>
         <span className="title_body">{highestScore}</span>
         <span className="restart" onClick={handleClick}>

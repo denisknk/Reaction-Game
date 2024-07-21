@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './Timer.css';
+import { gameFlowActions } from '../../store/gameFlow';
+import { GameConditions } from '../consts';
+import { useDispatch } from 'react-redux';
 
 const Timer = () => {
-  // eslint-disable-next-line
+  const dispatch = useDispatch();
   const [timeLeft, setTimeLeft] = useState(3);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (timeLeft === 1) {
         clearInterval(interval);
+        dispatch(gameFlowActions.gameCondition({ condition: GameConditions.Game }));
       }
       setTimeLeft(prevSeconds => prevSeconds - 1);
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timeLeft]);
 
   return (
     <div className="body_wrapper">

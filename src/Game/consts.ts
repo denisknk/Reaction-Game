@@ -7,7 +7,9 @@ export const gameConditions = {
 
 export enum GameConditions {
   Menu = 'menu',
+  Game = 'game',
   Timer = 'timer',
-  Action = 'action',
-  End = 'end'
+  EndScreen = 'endScreen'
 }
+
+export const emptyValuePlaceholder = '--';
