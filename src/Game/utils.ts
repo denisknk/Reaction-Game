@@ -1,10 +1,11 @@
-const getRandomNumber = (columnsCount: number) => {
-  return Math.floor(Math.random() * columnsCount) + 1;
-};
-export const getRandomNumbersArray = (columnsCount: number) => {
-  let xRandom = getRandomNumber(columnsCount);
-  let yRandom = getRandomNumber(columnsCount);
-  return [xRandom, yRandom];
+export const getRandomNumber = (columnsCount: number, prevCoordinate?: number | null): number => {
+  const gridCount = columnsCount * columnsCount;
+  let randomNumber = Math.floor(Math.random() * gridCount);
+  while (randomNumber === prevCoordinate) {
+    randomNumber = Math.floor(Math.random() * gridCount);
+  }
+
+  return randomNumber;
 };
 
 export const getRenderMatrix = (columnsCount: number) => {
@@ -15,4 +16,11 @@ export const getRenderMatrix = (columnsCount: number) => {
   arrY.length = columnsCount;
   arrY.fill(1);
   return [arrX, arrY];
+};
+
+export const getAverageReactionTime = (reactionTimes: number[]): number => {
+  const total = reactionTimes.reduce((acc, time) => acc + time, 0);
+  if (total === 0) return 0;
+  const average = total / reactionTimes.length;
+  return +average.toFixed(0);
 };

@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Action.css';
-import { updateScore, endTimeCount, getAverageReactionTime, handleTimeout } from '../../services/all';
-import { GameConditions } from '../consts';
-import { getRandomNumbersArray, getRenderMatrix } from '../utils';
-import { StyledCell } from './styles';
+import { getRenderMatrix } from '../utils';
+import { GridContainer, GridItem, StyledCell } from './styles';
 import { gameFlowActions } from '../../store/gameFlow';
-import { getScore } from '../../store/gameFlow/selectors';
+import { getActiveBox, getReactionTimes, getScore, getSelectedLevel } from '../../store/gameFlow/selectors';
+import { GameConditions } from '../consts';
 
 interface Props {
   columnsCount: number;
-  changeLevel: (number: number, condition: GameConditions) => void;
   timeOut: any;
 }
 
-const Play: React.FC<Props> = ({ columnsCount, changeLevel, timeOut }) => {
+const Play: React.FC<Props> = ({ columnsCount, timeOut }) => {
   const dispatch = useDispatch();
   const currentScore = useSelector(getScore);
+  const activeBox = useSelector(getActiveBox);
+  const selectedLevel = useSelector(getSelectedLevel);
+
   const [timeLeft, setTimeLeft] = useState(3);
-  const [isGameStarted, setIsGameStarted] = useState(false);
-  const [randomNumbersArr, setRandomNumbersArr] = useState(getRandomNumbersArray(columnsCount));
   const [matrix, setMatrix] = useState(getRenderMatrix(columnsCount));
   const [xAxis, yAxis] = matrix;
-
-  console.log('currentScore', currentScore);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const gameBoxesArray = Array.from({ length: columnsCount * columnsCount }, (_, i) => i);
+  const { gameOver, clickOnBox, gameCondition } = gameFlowActions;
 
   // useEffect(() => {
   //   const interval = setTimeout(() => {
@@ -36,41 +36,42 @@ const Play: React.FC<Props> = ({ columnsCount, changeLevel, timeOut }) => {
   //   return () => clearInterval(interval);
   // }, []);
 
-  const onClick = (isActiveElement: boolean) => {
-    setIsGameStarted(true);
-    // endTimeCount();
+  useEffect(() => {
+    setStartTime(Date.now());
+    const gameOverTimer = setTimeout(() => {
+      dispatch(gameCondition({ condition: GameConditions.EndScreen }));
+      // changeLevel(columnsCount - 2, GameConditions.End);
+    }, timeOut);
 
-    if (isActiveElement) {
-      // handleTimeout(changeLevel, timeOut);
+    return () => clearTimeout(gameOverTimer);
+  }, [activeBox, dispatch]);
 
-      dispatch(gameFlowActions.addScore());
-      setRandomNumbersArr(getRandomNumbersArray(columnsCount));
+  // const handleBoxClick = (index: number) => {
+  //   if (index === gameState.currentBox) {
+  //     const reactionTime = Date.now() - (startTime as number);
+  //     dispatch(clickBox(reactionTime));
+  //     setStartTime(Date.now());
+  //   }
+  // };
+
+  const onClick = (clickedIndex: number) => {
+    const isCurrentBoxActive = activeBox === clickedIndex;
+    if (isCurrentBoxActive) {
+      dispatch(clickOnBox({ timeSpent: Date.now() - (startTime as number) }));
     } else {
-      getAverageReactionTime();
-
-      changeLevel(columnsCount - 2, GameConditions.End);
+      // getAverageReactionTime();
+      dispatch(gameCondition({ condition: GameConditions.EndScreen }));
     }
   };
 
-  // setRandomNumbersArr(getRandomNumbersArray(columnsCount));
+  console.log('activeBox', activeBox);
 
   return (
-    <table>
-      <tbody>
-        {xAxis.map((el, i) => {
-          return (
-            <tr key={i}>
-              {yAxis.map((el, idx) => {
-                if (i + 1 === randomNumbersArr[0] && idx + 1 === randomNumbersArr[1]) {
-                  return <StyledCell isActive key={idx} onClick={() => onClick(true)} />;
-                }
-                return <StyledCell key={idx} onClick={() => onClick(false)} />;
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <GridContainer size={columnsCount}>
+      {gameBoxesArray.map(idx => (
+        <GridItem isActive={idx === activeBox} key={idx} onClick={() => onClick(idx)} />
+      ))}
+    </GridContainer>
   );
 };
 
