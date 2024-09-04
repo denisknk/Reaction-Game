@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Action.css';
-import { getRenderMatrix } from '../utils';
-import { GridContainer, GridItem, StyledCell } from './styles';
+import { GridContainer, GridItem } from './styles';
 import { gameFlowActions } from '../../store/gameFlow';
-import { getActiveBox, getReactionTimes, getScore, getSelectedLevel } from '../../store/gameFlow/selectors';
+import { getActiveBox } from '../../store/gameFlow/selectors';
 import { GameConditions } from '../consts';
 
 interface Props {
@@ -14,16 +13,10 @@ interface Props {
 
 const Play: React.FC<Props> = ({ columnsCount, timeOut }) => {
   const dispatch = useDispatch();
-  const currentScore = useSelector(getScore);
   const activeBox = useSelector(getActiveBox);
-  const selectedLevel = useSelector(getSelectedLevel);
-
-  const [timeLeft, setTimeLeft] = useState(3);
-  const [matrix, setMatrix] = useState(getRenderMatrix(columnsCount));
-  const [xAxis, yAxis] = matrix;
   const [startTime, setStartTime] = useState<number | null>(null);
   const gameBoxesArray = Array.from({ length: columnsCount * columnsCount }, (_, i) => i);
-  const { gameOver, clickOnBox, gameCondition } = gameFlowActions;
+  const { clickOnBox, gameCondition } = gameFlowActions;
 
   useEffect(() => {
     setStartTime(Date.now());

@@ -8,8 +8,8 @@ export const GridContainer = styled.div<{ size: number }>`
   display: grid;
   gap: 2px;
   ${({ size }) => `grid-template-columns: repeat(${size}, 1fr);`}
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   padding: 2px;
   box-sizing: border-box;
 `;
