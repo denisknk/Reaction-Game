@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Reaction-Game/static/css/main.b9b476d9.chunk.css",
-    "main.js": "/Reaction-Game/static/js/main.f1d90b47.chunk.js",
-    "main.js.map": "/Reaction-Game/static/js/main.f1d90b47.chunk.js.map",
+    "main.css": "/Reaction-Game/static/css/main.144a7795.chunk.css",
+    "main.js": "/Reaction-Game/static/js/main.53f69d03.chunk.js",
+    "main.js.map": "/Reaction-Game/static/js/main.53f69d03.chunk.js.map",
     "runtime-main.js": "/Reaction-Game/static/js/runtime-main.96578002.js",
     "runtime-main.js.map": "/Reaction-Game/static/js/runtime-main.96578002.js.map",
     "static/js/2.7c33eab9.chunk.js": "/Reaction-Game/static/js/2.7c33eab9.chunk.js",
     "static/js/2.7c33eab9.chunk.js.map": "/Reaction-Game/static/js/2.7c33eab9.chunk.js.map",
     "index.html": "/Reaction-Game/index.html",
-    "precache-manifest.eb26dca07d327ff42a286feb4153ac35.js": "/Reaction-Game/precache-manifest.eb26dca07d327ff42a286feb4153ac35.js",
+    "precache-manifest.2e745f43fdd20d504605b91a1e5ab1a3.js": "/Reaction-Game/precache-manifest.2e745f43fdd20d504605b91a1e5ab1a3.js",
     "service-worker.js": "/Reaction-Game/service-worker.js",
-    "static/css/main.b9b476d9.chunk.css.map": "/Reaction-Game/static/css/main.b9b476d9.chunk.css.map",
+    "static/css/main.144a7795.chunk.css.map": "/Reaction-Game/static/css/main.144a7795.chunk.css.map",
     "static/js/2.7c33eab9.chunk.js.LICENSE.txt": "/Reaction-Game/static/js/2.7c33eab9.chunk.js.LICENSE.txt",
     "static/media/Roboto-Light.ttf": "/Reaction-Game/static/media/Roboto-Light.88823c20.ttf",
     "static/media/Roboto-Medium.ttf": "/Reaction-Game/static/media/Roboto-Medium.58aef543.ttf",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.96578002.js",
     "static/js/2.7c33eab9.chunk.js",
-    "static/css/main.b9b476d9.chunk.css",
-    "static/js/main.f1d90b47.chunk.js"
+    "static/css/main.144a7795.chunk.css",
+    "static/js/main.53f69d03.chunk.js"
   ]
 }
