@@ -25,46 +25,23 @@ const Play: React.FC<Props> = ({ columnsCount, timeOut }) => {
   const gameBoxesArray = Array.from({ length: columnsCount * columnsCount }, (_, i) => i);
   const { gameOver, clickOnBox, gameCondition } = gameFlowActions;
 
-  // useEffect(() => {
-  //   const interval = setTimeout(() => {
-  //     if (!isGameStarted) {
-  //       changeLevel(columnsCount - 2, GameConditions.End);
-  //     }
-  //     clearInterval(interval);
-  //   }, timeOut);
-  //
-  //   return () => clearInterval(interval);
-  // }, []);
-
   useEffect(() => {
     setStartTime(Date.now());
     const gameOverTimer = setTimeout(() => {
       dispatch(gameCondition({ condition: GameConditions.EndScreen }));
-      // changeLevel(columnsCount - 2, GameConditions.End);
     }, timeOut);
 
     return () => clearTimeout(gameOverTimer);
   }, [activeBox, dispatch]);
-
-  // const handleBoxClick = (index: number) => {
-  //   if (index === gameState.currentBox) {
-  //     const reactionTime = Date.now() - (startTime as number);
-  //     dispatch(clickBox(reactionTime));
-  //     setStartTime(Date.now());
-  //   }
-  // };
 
   const onClick = (clickedIndex: number) => {
     const isCurrentBoxActive = activeBox === clickedIndex;
     if (isCurrentBoxActive) {
       dispatch(clickOnBox({ timeSpent: Date.now() - (startTime as number) }));
     } else {
-      // getAverageReactionTime();
       dispatch(gameCondition({ condition: GameConditions.EndScreen }));
     }
   };
-
-  console.log('activeBox', activeBox);
 
   return (
     <GridContainer size={columnsCount}>

@@ -13,3 +13,9 @@ export enum GameConditions {
 }
 
 export const emptyValuePlaceholder = '--';
+
+export enum LevelTimes {
+  Easy = 1500,
+  Medium = 1000,
+  Hard = 800
+}
