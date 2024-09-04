@@ -3,9 +3,6 @@ import './Levels.css';
 import Dot from './Dot/Dot';
 import { useDispatch } from 'react-redux';
 import { gameFlowActions } from '../../store/gameFlow';
-import { GameConditions } from '../consts';
-import { startTimeCount } from '../../services/all';
-// import { Link } from "react-router-dom";
 
 const Levels: React.FC = () => {
   const dispatch = useDispatch();
@@ -38,29 +35,6 @@ const Levels: React.FC = () => {
     dispatch(gameFlowActions.startGame({ columnsCount: matrixWidth, selectedLevel: index }));
   };
 
-  const onSelect = (index: number) => {
-    let timeOut: any;
-    switch (index) {
-      case 0:
-        timeOut = 1700;
-        break;
-      case 1:
-        timeOut = 1400;
-        break;
-      case 2:
-        timeOut = 540;
-        break;
-      default:
-        return;
-    }
-    dispatch(gameFlowActions.gameCondition({ condition: GameConditions.Game }));
-    setTimeout(() => {
-      dispatch(gameFlowActions.gameCondition({ condition: GameConditions.Game })); // changeLevel(index, GameConditions.Action);
-      startTimeCount();
-      // handleTimeout(changeLevel, timeOut);
-    }, 3000);
-  };
-
   return (
     <div className="levels__wrapper">
       {colors.map((color, index) => (
@@ -68,7 +42,6 @@ const Levels: React.FC = () => {
           color={color}
           blur={setDefaultColor}
           hover={() => onHover(index)}
-          // press={() => onSelect(index)}
           press={() => onGameStart(index)}
           key={index}
         />
