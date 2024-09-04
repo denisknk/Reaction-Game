@@ -14,7 +14,7 @@ body {
 
 .body_wrapper {
   background-color: #dff6fd;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .instructions {
@@ -40,7 +40,7 @@ body {
   color: #55555588;
   cursor: pointer;
 
-  @media only screen and (max-width: 425px)  {
+  @media only screen and (max-width: 768px)  {
     position: initial;
   }
 }
