@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import './Levels.css';
 import Dot from './Dot/Dot';
 import { useDispatch } from 'react-redux';

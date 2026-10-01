@@ -39,8 +39,10 @@ body {
   width: 48px;
   color: #55555588;
   cursor: pointer;
+}
 
-  @media only screen and (max-width: 768px)  {
+@media only screen and (max-width: 768px) {
+  .body_wrapper .info-icon {
     position: initial;
   }
 }

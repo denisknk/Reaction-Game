@@ -8,7 +8,7 @@ import { GameConditions } from '../consts';
 
 interface Props {
   columnsCount: number;
-  timeOut: any;
+  timeOut: number;
 }
 
 const Play: React.FC<Props> = ({ columnsCount, timeOut }) => {
@@ -25,7 +25,7 @@ const Play: React.FC<Props> = ({ columnsCount, timeOut }) => {
     }, timeOut);
 
     return () => clearTimeout(gameOverTimer);
-  }, [activeBox, dispatch]);
+  }, [activeBox, dispatch, timeOut, gameCondition]);
 
   const onClick = (clickedIndex: number) => {
     const isCurrentBoxActive = activeBox === clickedIndex;

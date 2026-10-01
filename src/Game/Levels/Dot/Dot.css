@@ -7,8 +7,10 @@
   align-self: center;
   justify-content: space-between;
   width: 300px;
+}
 
-  @media only screen and (max-width: 425px) {
+@media only screen and (max-width: 425px) {
+  .levels__wrapper {
     width: 50%;
   }
 }

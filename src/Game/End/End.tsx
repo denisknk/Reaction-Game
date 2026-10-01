@@ -16,7 +16,7 @@ const End: React.FC = () => {
     dispatch(gameFlowActions.resetState());
     dispatch(gameFlowActions.gameCondition({ condition: GameConditions.Menu }));
   };
-  const highestScore = Math.max(...allScoresArray);
+  const highestScore = allScoresArray.length > 0 ? Math.max(...allScoresArray) : currentScore;
   const averageTimeText = averageReactionTime ? `${averageReactionTime} milliseconds` : emptyValuePlaceholder;
 
   return (
@@ -26,7 +26,7 @@ const End: React.FC = () => {
         <div className="title_header">Average Reaction Time</div>
         <span className="title_body">{averageTimeText}</span>
         <div className="title_header">Score</div>
-        <span className="title_body">{currentScore || emptyValuePlaceholder}</span>
+        <span className="title_body">{currentScore}</span>
         <div className="title_header">Highest Score</div>
         <span className="title_body">{highestScore}</span>
         <span className="restart" onClick={handleClick}>

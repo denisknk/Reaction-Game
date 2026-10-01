@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import './Action';
 import Play from './Play';
 import { getSelectedLevel } from '../../store/gameFlow/selectors';
 import { LevelTimes } from '../consts';

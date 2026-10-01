@@ -9,23 +9,22 @@ const Timer = () => {
   const [timeLeft, setTimeLeft] = useState(3);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (timeLeft === 1) {
-        clearInterval(interval);
-        dispatch(gameFlowActions.gameCondition({ condition: GameConditions.Game }));
-      }
+    if (timeLeft <= 0) {
+      dispatch(gameFlowActions.gameCondition({ condition: GameConditions.Game }));
+      return;
+    }
+
+    const timer = setTimeout(() => {
       setTimeLeft(prevSeconds => prevSeconds - 1);
     }, 1000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [timeLeft]);
+    return () => clearTimeout(timer);
+  }, [timeLeft, dispatch]);
 
   return (
     <div className="body_wrapper">
-      <div className="instructions">Choose Difficulty Level</div>
-      <div className="timer-wrapper">{timeLeft}</div>
+      <div className="instructions">Get Ready!</div>
+      <div className="timer-wrapper">{timeLeft > 0 ? timeLeft : ''}</div>
     </div>
   );
 };

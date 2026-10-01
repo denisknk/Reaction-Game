@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../App.css';
 import Menu from './Menu/Menu';
 import Action from './Action/Action';
 import Timer from './Timer/Timer';
 import End from './End/End';
 import { GameConditions } from './consts';
-import { geCurrentGameCondition } from '../store/gameFlow/selectors';
+import { getCurrentGameCondition } from '../store/gameFlow/selectors';
 import { useSelector } from 'react-redux';
 
 const Game: React.FC = () => {
-  const currentGameCondition = useSelector(geCurrentGameCondition);
+  const currentGameCondition = useSelector(getCurrentGameCondition);
 
   switch (currentGameCondition) {
     case GameConditions.Menu:

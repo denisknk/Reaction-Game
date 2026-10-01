@@ -9,8 +9,6 @@ export const appHistory = createBrowserHistory();
 export const appStore = createRootStore(appHistory);
 
 const App = () => {
-  const state = appStore.getState();
-
   return (
     <Provider store={appStore}>
       <Game />
