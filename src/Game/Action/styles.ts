@@ -1,13 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const shrink = keyframes`
-  from {
-    transform: scaleX(1);
-  }
-  to {
-    transform: scaleX(0);
-  }
-`;
+import styled from 'styled-components';
 
 export const GameWrapper = styled.div`
   display: flex;
@@ -25,12 +16,13 @@ export const ProgressBarWrapper = styled.div`
   flex-shrink: 0;
 `;
 
-export const ProgressBar = styled.div<{ duration: number }>`
+export const ProgressBar = styled.div`
   height: 100%;
   width: 100%;
   background-color: rgba(255, 77, 109, 0.75);
   transform-origin: left center;
-  animation: ${shrink} ${({ duration }) => duration}ms linear forwards;
+  transform: scaleX(1);
+  will-change: transform;
 `;
 
 export const StyledCell = styled.td<{ isActive?: boolean }>`
