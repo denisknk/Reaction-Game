@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Action.css';
-import { GridContainer, GridItem } from './styles';
+import { GameWrapper, GridContainer, GridItem, ProgressBar, ProgressBarWrapper } from './styles';
 import { gameFlowActions } from '../../store/gameFlow';
 import { getActiveBox } from '../../store/gameFlow/selectors';
 import { GameConditions } from '../consts';
@@ -37,11 +37,16 @@ const Play: React.FC<Props> = ({ columnsCount, timeOut }) => {
   };
 
   return (
-    <GridContainer size={columnsCount}>
-      {gameBoxesArray.map(idx => (
-        <GridItem isActive={idx === activeBox} key={idx} onClick={() => onClick(idx)} />
-      ))}
-    </GridContainer>
+    <GameWrapper>
+      <ProgressBarWrapper>
+        <ProgressBar key={`${activeBox}-${startTime}`} duration={timeOut} />
+      </ProgressBarWrapper>
+      <GridContainer size={columnsCount}>
+        {gameBoxesArray.map(idx => (
+          <GridItem isActive={idx === activeBox} key={idx} onClick={() => onClick(idx)} />
+        ))}
+      </GridContainer>
+    </GameWrapper>
   );
 };
 
