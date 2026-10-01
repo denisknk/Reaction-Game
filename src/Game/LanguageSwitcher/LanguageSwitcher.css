@@ -1,0 +1,37 @@
+.language-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  z-index: 100;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #55555588;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.lang-btn:hover {
+  color: #555555;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.lang-btn.active {
+  color: #169616;
+  font-weight: 700;
+}
+
+.lang-divider {
+  color: #55555555;
+  font-size: 1rem;
+}

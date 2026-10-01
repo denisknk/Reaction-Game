@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Timer.css';
 import { gameFlowActions } from '../../store/gameFlow';
 import { GameConditions } from '../consts';
 import { useDispatch } from 'react-redux';
 
 const Timer = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [timeLeft, setTimeLeft] = useState(3);
 
@@ -23,7 +25,7 @@ const Timer = () => {
 
   return (
     <div className="body_wrapper">
-      <div className="instructions">Get Ready!</div>
+      <div className="instructions">{t('getReady', 'Get Ready!')}</div>
       <div className="timer-wrapper">{timeLeft > 0 ? timeLeft : ''}</div>
     </div>
   );

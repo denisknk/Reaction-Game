@@ -1,0 +1,18 @@
+{
+  "chooseDifficulty": "Choose Difficulty Level",
+  "getReady": "Get Ready!",
+  "howToPlayHeader": "Rules of the Game",
+  "howToPlayStep1": "Choose a difficulty level by clicking on one of the three dots. The easiest level is on the left.",
+  "howToPlayStep2": "The timer will count down 3 seconds so you have time to get ready.",
+  "howToPlayStep3": "Depending on the selected level, you will see a grid: 3x3 for Easy, 4x4 for Medium, and 5x5 for Hard.",
+  "howToPlayStep4": "One of the boxes will light up green. Click on it before time runs out, otherwise the game is over.",
+  "howToPlayStep5": "The game starts at a relaxed pace for Easy level, and a faster pace for Hard level.",
+  "howToPlayStep6": "Each successful click earns you 1 point, and a new green box will appear immediately.",
+  "howToPlayStep7": "Keep playing as long as you can and test your reaction speed!",
+  "gameOver": "GAME OVER!",
+  "averageReactionTime": "Average Reaction Time",
+  "score": "Score",
+  "highestScore": "Highest Score",
+  "restart": "Restart",
+  "milliseconds": "milliseconds"
+}

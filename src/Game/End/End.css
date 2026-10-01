@@ -4,6 +4,7 @@
   padding-top: 2em;
   color: #555555;
 }
+
 .gameoverheader {
   display: block;
   font-size: 2.5em;
@@ -27,7 +28,6 @@
 
 .restart {
   color: #169616;
-  text-decoration: underline;
   font-size: 1.7em;
   cursor: pointer;
 }
