@@ -66,7 +66,7 @@ const Play: React.FC<Props> = ({ columnsCount, timeOut }) => {
   return (
     <GameWrapper>
       <ProgressBarWrapper>
-        <ProgressBar ref={progressBarRef} />
+        <ProgressBar data-testid="progress-bar" ref={progressBarRef} />
       </ProgressBarWrapper>
       <GridContainer size={columnsCount}>
         {gameBoxesArray.map(idx => (

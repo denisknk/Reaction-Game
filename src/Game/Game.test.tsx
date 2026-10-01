@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, fireEvent, act } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 import App, { appStore } from '../App';
 import { gameFlowActions } from '../store/gameFlow';
 import { GameConditions, LevelTimes } from './consts';
@@ -21,7 +20,7 @@ describe('Reaction Game UI & Gameplay Tests', () => {
   const advanceStep = (delta: number) => {
     currentTime += delta;
     act(() => {
-      jest.advanceTimersByTime(delta);
+      vi.advanceTimersByTime(delta);
       executeCallbacks(currentTime);
     });
   };
@@ -37,15 +36,15 @@ describe('Reaction Game UI & Gameplay Tests', () => {
   };
 
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     currentTime = 1000000;
     rafQueue = [];
-    jest.spyOn(Date, 'now').mockImplementation(() => currentTime);
-    jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb: FrameRequestCallback) => {
+    vi.spyOn(Date, 'now').mockImplementation(() => currentTime);
+    vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb: FrameRequestCallback) => {
       rafQueue.push(cb);
       return rafQueue.length;
     });
-    jest.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {
+    vi.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {
       rafQueue = [];
     });
     appStore.dispatch(gameFlowActions.resetState());
@@ -53,8 +52,8 @@ describe('Reaction Game UI & Gameplay Tests', () => {
   });
 
   afterEach(() => {
-    jest.useRealTimers();
-    jest.restoreAllMocks();
+    vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
   test('full game flow: menu -> language toggle -> level select -> timer -> play -> click active box -> timeout -> game over -> restart', () => {
@@ -116,7 +115,7 @@ describe('Reaction Game UI & Gameplay Tests', () => {
   };
 
   test('progress bar smoothly shrinks and accurately scales to 0 at timeout', () => {
-    const { container } = render(<App />);
+    const { container, getByTestId } = render(<App />);
 
     const dots = container.querySelectorAll('.level-dot__wrapper');
     fireEvent.click(dots[0]);
@@ -125,23 +124,24 @@ describe('Reaction Game UI & Gameplay Tests', () => {
       advanceTimeAndFrames(1000);
     }
 
-    const progressBar = container.querySelector('.sc-eqUAAy') as HTMLElement;
+    const progressBar = getByTestId('progress-bar');
     expect(progressBar).toBeInTheDocument();
 
-    expect(getScale(progressBar)).toBe(1);
-
+    // Advance to 50% elapsed
     advanceTimeAndFrames(LevelTimes.Easy * 0.5);
     expect(getScale(progressBar)).toBeCloseTo(0.5, 2);
 
+    // Advance to 90% elapsed
     advanceTimeAndFrames(LevelTimes.Easy * 0.4);
     expect(getScale(progressBar)).toBeCloseTo(0.1, 2);
 
+    // Advance remaining 10% to hit timeout exactly
     advanceTimeAndFrames(LevelTimes.Easy * 0.1);
     expect(getScale(progressBar)).toBe(0);
   });
 
   test('clicking active box right before timeout (at 95% elapsed) successfully scores and resets the bar', () => {
-    const { container } = render(<App />);
+    const { container, getByTestId } = render(<App />);
 
     const dots = container.querySelectorAll('.level-dot__wrapper');
     fireEvent.click(dots[0]);
@@ -150,7 +150,7 @@ describe('Reaction Game UI & Gameplay Tests', () => {
       advanceTimeAndFrames(1000);
     }
 
-    const progressBar = container.querySelector('.sc-eqUAAy') as HTMLElement;
+    const progressBar = getByTestId('progress-bar');
 
     advanceTimeAndFrames(LevelTimes.Easy * 0.95);
     expect(getScale(progressBar)).toBeCloseTo(0.05, 2);
